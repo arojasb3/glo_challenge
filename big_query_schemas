@@ -1,0 +1,8 @@
+For departments:
+id:INTEGER, department:STRING
+
+For Jobs:
+id:Integer, job: STRING
+
+For Hired_employees:
+id:INTEGER, name:STRING, datetime:DATETIME, department_id:INTEGER, job_id:INTEGER
