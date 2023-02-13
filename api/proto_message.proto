@@ -1,0 +1,21 @@
+syntax = "proto2";
+
+package globant;
+
+message Job {
+  optional int32 id = 1;
+  optional string job = 2;
+}
+
+message Department {
+  optional int32 id = 1;
+  optional string department = 2;
+}
+
+message Hired_employee {
+  optional int32 id = 1;
+  optional string name = 2;
+  optional string datetime = 3;
+  optional int32 department_id = 4;
+  optional int32 job_id = 5;
+}
