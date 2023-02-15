@@ -19,3 +19,11 @@ message Hired_employee {
   optional int32 department_id = 4;
   optional int32 job_id = 5;
 }
+
+message Wrong_record {
+  optional string uuid = 1;
+  optional string content = 2;
+  optional string table = 3;
+  optional string error = 4;
+  optional string datetime = 5;
+}

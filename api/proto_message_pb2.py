@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x13proto_message.proto\x12\x07globant\"\x1e\n\x03Job\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0b\n\x03job\x18\x02 \x01(\t\",\n\nDepartment\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x12\n\ndepartment\x18\x02 \x01(\t\"c\n\x0eHired_employee\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x10\n\x08\x64\x61tetime\x18\x03 \x01(\t\x12\x15\n\rdepartment_id\x18\x04 \x01(\x05\x12\x0e\n\x06job_id\x18\x05 \x01(\x05')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x13proto_message.proto\x12\x07globant\"\x1e\n\x03Job\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0b\n\x03job\x18\x02 \x01(\t\",\n\nDepartment\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x12\n\ndepartment\x18\x02 \x01(\t\"c\n\x0eHired_employee\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x10\n\x08\x64\x61tetime\x18\x03 \x01(\t\x12\x15\n\rdepartment_id\x18\x04 \x01(\x05\x12\x0e\n\x06job_id\x18\x05 \x01(\x05\"]\n\x0cWrong_record\x12\x0c\n\x04uuid\x18\x01 \x01(\t\x12\x0f\n\x07\x63ontent\x18\x02 \x01(\t\x12\r\n\x05table\x18\x03 \x01(\t\x12\r\n\x05\x65rror\x18\x04 \x01(\t\x12\x10\n\x08\x64\x61tetime\x18\x05 \x01(\t')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'proto_message_pb2', globals())
@@ -26,4 +26,6 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _DEPARTMENT._serialized_end=108
   _HIRED_EMPLOYEE._serialized_start=110
   _HIRED_EMPLOYEE._serialized_end=209
+  _WRONG_RECORD._serialized_start=211
+  _WRONG_RECORD._serialized_end=304
 # @@protoc_insertion_point(module_scope)
