@@ -62,6 +62,14 @@ def aux_backup(table_name):
         error_message = str(e)
         return ({"msg": f"Error found {error_message}"}), 400
 
+def aux_restore(table_name):
+    try:
+        msg = table_backups.restore_table(table_name)
+        return ({"msg": msg}), 200
+    except Exception as e:
+        error_message = str(e)
+        return ({"msg": f"Error found {error_message}"}), 400
+
 @app.route('/api/v1/backup/jobs', methods=['GET'])
 def backup_jobs():
     table_name = 'jobs'
@@ -76,6 +84,21 @@ def backup_departments():
 def backup_hired_employees():
     table_name = 'hired_employees'
     return aux_backup(table_name)
+
+@app.route('/api/v1/restore/jobs', methods=['GET'])
+def restore_jobs():
+    table_name = 'jobs'
+    return aux_restore(table_name)
+
+@app.route('/api/v1/restore/departments', methods=['GET'])
+def restore_departments():
+    table_name = 'departments'
+    return aux_restore(table_name)
+
+@app.route('/api/v1/restore/hired_employees', methods=['GET'])
+def restore_hired_employees():
+    table_name = 'hired_employees'
+    return aux_restore(table_name)
 
 @app.route('/api/v1/test', methods=['POST'])
 def test_json():
