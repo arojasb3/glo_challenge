@@ -121,6 +121,20 @@ The feature is done using BigQuery's load_table_from_uri function, where the uri
 
 Finally, I created a Dockerfile so we can create a container of this api service. It is currently being saved in my GCP's container registry but it can be created and loaded locally using the repo's Dockerfile.
 
+To run the dockerfile you will need to set up this 3 env variables:
+
+- GCP_PROJECT: GCP project name
+- GCP_BUCKET: GCP bucket where data and backups will be stored
+- GCP_APPLICATION_CREDENTIALS: Json file with the service account credentials.
+- DOCKER_IMAGE: Docker image path
+
+after those variables have been set up you can run something like this:
+
+```
+
+docker run -v $GCP_APPLICATION_CREDENTIALS:/tmp/keys/JSON_FILE_NAME.json:ro --env GCP_PROJECT=$GCP_PROJECT --env GCP_BUCKET=$GCP_BUCKET --env GOOGLE_APPLICATION_CREDENTIALS=JSON_FILE_NAME.json -p 5000:5000 -d $DOCKER_IMAGE
+```
+
 ## Challenge 2: Data Analysis using GCP Data Studio
 
 For this second challenge we have to do a couple queries in our previously loaded data and plot our findings using our preferred data viz tool. Again, since we are using a lot of GCP services and tools, let's go ahead and use Data Studio since it is easy to use along BigQuery.
@@ -157,3 +171,14 @@ I had a lot of extra ideas to implement in this project but due time restriction
 Right now the only way to authenticate is having and environmental variable called GCP_APPLICATION_CREDENTIALS pointing towards a service account json credentials file inside your local files.
 
 - Extra landing tables for backup: After creating the backup in AVRO format, BigQuery suggests to create an extra landing table to parse any timestamp columns into datetimes for BigQuery, otherwise there may be some issues parsing them and they could be even written in string format, changing the table schema... Not good.
+
+## Considerations:
+
+After writing this Readme and trying different requests, the API has a problem after some time being up. The BigQuery stream takes some time to close, so it won;t let you change the table where you want to add records because the other stream is still up and running.
+
+If the service was deployed on cloud functions, it probably wouldn't matter that much since the service is ephemeral and while there are no current requests it will be shut down.
+
+On Cloud Run of App Engine this could become a problem, one would need to manually close the stream inside the API to ensure this stops happenning.
+
+## Special Thanks:
+Thanks to [dbenite2] (https://github.com/dbenite2) for his constant support during this challenge and extra tips for handling the docker images.
