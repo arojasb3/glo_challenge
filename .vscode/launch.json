@@ -1,0 +1,34 @@
+{
+    "configurations": [
+        {
+            "name": "Cloud Run: Run/Debug Locally",
+            "type": "cloudcode.cloudrun",
+            "request": "launch",
+            "build": {
+                "docker": {
+                    "path": "api/Dockerfile"
+                }
+            },
+            "image": "glo-challenge",
+            "service": {
+                "name": "glo-challenge",
+                "containerPort": 8080,
+                "env": [
+                    {
+                        "name": "GCP_PROJECT=solar-fuze-233817",
+                        "value": ""
+                    }
+                ],
+                "resources": {
+                    "limits": {
+                        "memory": "256Mi"
+                    }
+                }
+            },
+            "target": {
+                "minikube": {}
+            },
+            "watch": true
+        }
+    ]
+}

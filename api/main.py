@@ -5,6 +5,7 @@ import proto_message_pb2 as bqm
 import bigquery_manager
 import request_parser
 import logging
+import table_backups
 
 app = Flask(__name__)
 
@@ -53,6 +54,28 @@ def aux_petition_handler(request, proto_class, table_name):
         error_message = str(e)
         return ({"msg": f"Error found {error_message}"}), 400
 
+def aux_backup(table_name):
+    try:
+        msg = table_backups.create_table_backup(table_name)
+        return ({"msg": msg}), 200
+    except Exception as e:
+        error_message = str(e)
+        return ({"msg": f"Error found {error_message}"}), 400
+
+@app.route('/api/v1/backup/jobs', methods=['GET'])
+def backup_jobs():
+    table_name = 'jobs'
+    return aux_backup(table_name)
+
+@app.route('/api/v1/backup/departments', methods=['GET'])
+def backup_departments():
+    table_name = 'departments'
+    return aux_backup(table_name)
+
+@app.route('/api/v1/backup/hired_employees', methods=['GET'])
+def backup_hired_employees():
+    table_name = 'hired_employees'
+    return aux_backup(table_name)
 
 @app.route('/api/v1/test', methods=['POST'])
 def test_json():
@@ -60,7 +83,7 @@ def test_json():
     if request.method == 'POST':
         if not request.is_json:
             return jsonify({"msg": "Missing JSON in request"}), 400  
-        return ({"msg": str((request.get_json()[0]))}), 200
+        return jsonify({"msg": str((request.get_json()[0]))}), 200
 
 if __name__ == '__main__':
-  app.run(debug=True)
+  app.run(debug=True, host='0.0.0.0')
