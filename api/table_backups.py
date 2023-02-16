@@ -16,7 +16,7 @@ def create_table_backup(table_id):
         table_ref,
         destination_uri,
         location="us-east1",
-        job_config=bigquery.job.ExtractJobConfig(destination_format='AVRO')
+        job_config=bigquery.job.ExtractJobConfig(destination_format='AVRO', use_avro_logical_types=True)
     )
     extract_job.result()
 
