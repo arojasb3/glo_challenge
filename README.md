@@ -124,3 +124,36 @@ Finally, I created a Dockerfile so we can create a container of this api service
 ## Challenge 2: Data Analysis using GCP Data Studio
 
 For this second challenge we have to do a couple queries in our previously loaded data and plot our findings using our preferred data viz tool. Again, since we are using a lot of GCP services and tools, let's go ahead and use Data Studio since it is easy to use along BigQuery.
+
+### First Query: Number of hirings per department and job for each quarter on 2021
+
+This query is rather hard to analyze, this created a fairly big table with not many hirings per quarter. Still, it can be seen on sql_queries/challenge2-1.sql.
+
+We can see that hirings on Q1 were a lot lower than on the rest, probably some budget issues in the company?
+
+And legal department had the least number of hirings on the entire year and on each quarter, while Support and Engineering were among the top.
+
+### Departments with hirings above the average
+
+With an average of 129.6 hirings per department on 2021, we have the following above it:
+- Support
+- Engineering
+- Services
+- Human Resources
+- Business Development
+- Research and Development
+- Marketing
+
+Being them ordered by their number of hirings.
+
+We can see some plots done using looker studio inside the sql_queries/Looker_report.pdf. If you need access to the actual report online please let me know! :)
+
+## Missing plans:
+
+I had a lot of extra ideas to implement in this project but due time restrictions I wasn't able to implement them:
+
+- Cloud run/functions and API Gateway: Deploy the api using either cloud run or cloud functions, then use API Gateway to handle the requests on the API. This aiming towards the security of the service, implementing different authentication methods. 
+
+Right now the only way to authenticate is having and environmental variable called GCP_APPLICATION_CREDENTIALS pointing towards a service account json credentials file inside your local files.
+
+- Extra landing tables for backup: After creating the backup in AVRO format, BigQuery suggests to create an extra landing table to parse any timestamp columns into datetimes for BigQuery, otherwise there may be some issues parsing them and they could be even written in string format, changing the table schema... Not good.
